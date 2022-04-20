@@ -9,40 +9,41 @@ const team = [];
 const createTeam = function() {
 
     const createManager = function() {
-        inquirer.prompt([
-            {
-                type: "input",
-                name: "name",
-                message: "What is the manager's name?"
-            },
-            {
-                type: "input",
-                name: "id",
-                message: "What is the manager's ID?"
-            },
-            {
-                type: "input",
-                name: "email",
-                message: "What is the manager's email?"
-            },
-            {
-                type: "input",
-                name: "officeNo",
-                message: "What is the manager's office number?"
-            }
-        ])
-        .then(data => {
-            const manager = new Manager(data.name, data.id, data.email, data.officeNo);
-            team.push(manager);
-            console.log(`=== Manager position created! ===`);
-            createSubordinates();
-        });
+        inquirer
+            .prompt([
+                {
+                    type: "input",
+                    name: "name",
+                    message: "What is the manager's name?"
+                },
+                {
+                    type: "input",
+                    name: "id",
+                    message: "What is the manager's ID?"
+                },
+                {
+                    type: "input",
+                    name: "email",
+                    message: "What is the manager's email?"
+                },
+                {
+                    type: "input",
+                    name: "officeNo",
+                    message: "What is the manager's office number?"
+                }
+            ])
+            .then(data => {
+                const manager = new Manager(data.name, data.id, data.email, data.officeNo);
+                team.push(manager);
+                console.log(`=== Manager position created! ===`);
+                createSubordinates();
+            });
     }
 
     const createSubordinates = function() {
 
         const newEmployee = function() {
-            inquire
+            inquirer
                 .prompt([
                     {
                         type: "list",
@@ -52,12 +53,12 @@ const createTeam = function() {
                     }
                 ])
                 .then(data => {
-                    if (data.name === "Engineer") {
+                    if (data.title === "Engineer") {
                         createEngineer();
-                    } else if (data.name === "Intern") {
+                    } else if (data.title === "Intern") {
                         createIntern();
                     } else {
-                        // finishBuildingTeam();
+                        finishBuildingTeam();
                     }
                 });
             };
@@ -126,7 +127,11 @@ const createTeam = function() {
                 });
         }
 
-        chooseTitle();
+        const finishBuildingTeam = function() {
+            console.log(team);
+        }
+
+        newEmployee();
     }
 
     createManager();
@@ -135,9 +140,5 @@ const createTeam = function() {
 createTeam();
 
 //NEED:
-//function to make rest of the team
-//separate functions for engineer and intern
-//create classes out of data
-//a way to let the user finish building team
 //end result needs to be an array of objects in team variable
 //send these results to a 
