@@ -1,8 +1,10 @@
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const path = require("path");
 const fs = require("fs");
 const inquirer = require("inquirer");
+//require page-template
 
 const team = [];
 
@@ -47,15 +49,15 @@ const createTeam = function() {
                 .prompt([
                     {
                         type: "list",
-                        name: "title",
+                        name: "newEmployee",
                         message: "What type of employee would you like to add to the team?",
                         choices: ["Engineer", "Intern", "None (finish)"]
                     }
                 ])
                 .then(data => {
-                    if (data.title === "Engineer") {
+                    if (data.newEmployee === "Engineer") {
                         createEngineer();
-                    } else if (data.title === "Intern") {
+                    } else if (data.newEmployee === "Intern") {
                         createIntern();
                     } else {
                         finishBuildingTeam();
@@ -128,8 +130,10 @@ const createTeam = function() {
         }
 
         const finishBuildingTeam = function() {
-            console.log(team);
-        }
+            fs.writeFile(path.join(__dirname, "/dist/company-roster.html"), makeHTML(team), (err) => {
+                if (err) console.log(err) 
+            });
+        };
 
         newEmployee();
     }
