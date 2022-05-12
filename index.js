@@ -1,10 +1,12 @@
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const path = require("path");
+
 const fs = require("fs");
+const path = require("path");
 const inquirer = require("inquirer");
-//require page-template
+
+const makeHTML = require("./src/page-template")
 
 const team = [];
 
@@ -142,7 +144,3 @@ const createTeam = function() {
 }
 
 createTeam();
-
-//NEED:
-//end result needs to be an array of objects in team variable
-//send these results to a 
