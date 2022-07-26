@@ -10,7 +10,7 @@ const generateTeam = (team) => {
             <div class="card-body-container">
                 <div class="card-body">
                     <p>ID: ${manager.getId()}</p>
-                    <p>Email: ${manager.getEmail()}</p>
+                    <p>Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></p>
                     <p>Office: ${manager.getOffice()}</p>
                 </div>
             </div>
@@ -83,7 +83,7 @@ module.exports = team => {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./style.css">
-        <title>Document</title>
+        <title>Team Profile</title>
     </head>
     <body>
         <header id="header-container">
@@ -92,7 +92,7 @@ module.exports = team => {
     
         <main>
             <div id="container">
-                ${generateTeam()}
+                ${generateTeam(team)}
             </div>
         </main>
     </body>
